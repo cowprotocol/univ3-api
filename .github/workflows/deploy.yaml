@@ -18,7 +18,7 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
       - name: Image metadata
-        id: meta_univ3
+        id: meta
         uses: docker/metadata-action@v3
         with:
           images: ghcr.io/${{ github.repository }}
@@ -28,7 +28,7 @@ jobs:
           context: .
           file: docker/Dockerfile
           push: true
-          tags: ${{ steps.meta_services.outputs.tags }}
+          tags: ${{ steps.meta.outputs.tags }}
       - uses: cowprotocol/autodeploy-action@v1
         if: ${{ github.ref == 'refs/heads/main' }}
         with:
