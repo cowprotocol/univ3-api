@@ -1,0 +1,15 @@
+{
+  "name": "univ3-solver",
+  "type": "module",
+  "scripts": {
+    "start": "tsc && node dist/app.js"
+  },
+  "devDependencies": {
+    "typescript": "^4.6.3"
+  },
+  "dependencies": {
+    "@uniswap/sdk-core": "^3.0.1",
+    "@uniswap/smart-order-router": "^2.5.26",
+    "ethers": "^5.6.2"
+  }
+}
