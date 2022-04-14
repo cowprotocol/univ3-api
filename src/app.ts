@@ -98,7 +98,7 @@ async function handle_request(request: Request): Promise<Response> {
     }
 
     const swap_config: SwapOptions = {
-        deadline: 1000,
+        deadline: 4294967295,
         recipient: request.recipient,
         slippageTolerance: new Percent(5, 10_000),
     };
