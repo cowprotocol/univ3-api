@@ -31,6 +31,7 @@ if (node_url === undefined) {
     console.log("need NODE_URL env variable");
     process.exit(1);
 }
+console.log("using node url", node_url);
 const provider = new StaticJsonRpcProvider(node_url);
 const network = await provider.getNetwork();
 if (network.chainId !== chain_id) {
