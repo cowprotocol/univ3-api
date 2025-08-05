@@ -1,28 +1,7 @@
-import { AlphaRouter, AlphaRouterConfig, ChainId, CurrencyAmount, ID_TO_PROVIDER, ProtocolPoolSelection, SwapOptions, TokenProvider } from '@uniswap/smart-order-router';
-import { createServer, IncomingMessage, ServerResponse } from 'http';
+import { AlphaRouter, CurrencyAmount, SwapOptions, SwapType } from '@uniswap/smart-order-router';
+import { createServer, IncomingMessage } from 'http';
 import { StaticJsonRpcProvider } from '@ethersproject/providers';
-import { Token, TradeType, Percent } from '@uniswap/sdk-core';
-import { Protocol } from '@uniswap/router-sdk';
-
-const protocol_pool_selection: ProtocolPoolSelection = {
-    topN: 2,
-    topNDirectSwaps: 2,
-    topNTokenInOut: 3,
-    topNSecondHop: 1,
-    topNWithEachBaseToken: 3,
-    topNWithBaseToken: 5,
-
-};
-const alpha_router_config: AlphaRouterConfig = {
-    protocols: [Protocol.V3],
-    v2PoolSelection: protocol_pool_selection,
-    v3PoolSelection: protocol_pool_selection,
-    maxSwapsPerPath: 3,
-    maxSplits: 1,
-    minSplits: 1,
-    forceCrossProtocol: false,
-    distributionPercent: 100,
-};
+import { Token, TradeType, Percent, ChainId } from '@uniswap/sdk-core';
 
 const chain_id = ChainId.MAINNET;
 
@@ -99,6 +78,7 @@ async function handle_request(request: Request): Promise<Response> {
     }
 
     const swap_config: SwapOptions = {
+        type: SwapType.SWAP_ROUTER_02,
         deadline: 4294967295,
         recipient: request.recipient,
         slippageTolerance: new Percent(5, 10_000),
